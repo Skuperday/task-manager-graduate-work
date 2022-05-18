@@ -1,0 +1,40 @@
+<div th:fragment="header">
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+<div>
+    <img class="rounded m-2" src="http://localhost:63342/demo/templates/icons/icon.png" alt="not downloaded" width="65" height="65">
+</div>
+    <a class="navbar-brand" href="/">Главная</a>
+    <button class="navbar-toggler p-3" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+            <li sec:authorize="isAuthenticated()" class="nav-item active">
+                <a class="nav-link" href="/tickets/add">Создать заявку</a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                <a class="nav-link" href="/admin">Администрирование</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()" class="nav-item active">
+                <a class="nav-link" href="/login">Войти</a>
+            </li>
+
+            <br>
+
+            <li sec:authorize="isAuthenticated()" class="nav-item active">
+                <a class="nav-link text-right" th:text="'Кабинет пользователя ' + ${#authentication.getPrincipal().getFirstName()} + ' ' + ${#authentication.getPrincipal().getLastName()}" href="user/{user.id}"></a>
+            </li>
+
+            <li sec:authorize="isAuthenticated()" class="nav-item active">
+                <a class="nav-link text-right" href="/logout">Выход</a>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+</nav>
+</div>
