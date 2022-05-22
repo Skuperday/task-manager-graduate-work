@@ -16,8 +16,8 @@ public class Ticket {
     private Long id;
     private String topic;
     private String text;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private GregorianCalendar ticketDate;
+    @Column(name="status")
     private String status;
 
 
