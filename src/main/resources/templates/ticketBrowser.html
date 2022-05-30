@@ -18,8 +18,9 @@
                 <th scope="col">Номер</th>
                 <th scope="col">Тема</th>
                 <th scope="col">Текст</th>
+                <th scope="col">Статус</th>
                 <th scope="col">Дата</th>
-                <th scope="col">Ссылка</th>
+                <th scope="col">Действие</th>
             </tr>
             </thead>
             <tbody>
@@ -27,8 +28,9 @@
                 <td th:text="${ticket.id}"></td>
                 <td th:text="${ticket.topic}"></td>
                 <td th:text="${ticket.text}"></td>
+                <td th:text="${ticket.status}"></td>
                 <td th:text="${ticket.getTicketDate().time}"></td>
-                <td><a th:href="'/ticket' + ${ticket.id}">Подробнее</a></td>
+                <td><a th:href="'/ticket/' + ${ticket.id}">Подробнее</a></td>
             </tr>
             </tbody>
 

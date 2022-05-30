@@ -1,7 +1,9 @@
 package com.fedo4e.demo.entity;
 
+import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,11 +12,12 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
-@Entity
+@Entity(name = "User")
 @Table(name ="users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude="tickets")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +32,8 @@ public class User implements UserDetails {
     private String passwordConfirm;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Ticket> tickets;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -67,4 +72,7 @@ public class User implements UserDetails {
         return password;
     }
 
+    public void clearTickets(){
+        tickets.clear();
+    }
 }

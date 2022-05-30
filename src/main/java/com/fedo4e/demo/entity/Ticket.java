@@ -1,13 +1,16 @@
 package com.fedo4e.demo.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.GregorianCalendar;
+import java.util.Set;
 
 @Entity
 @Table(name="tickets")
 @Data
+@EqualsAndHashCode(exclude="user")
 @NoArgsConstructor
 public class Ticket {
     @Id
@@ -17,8 +20,10 @@ public class Ticket {
     private String topic;
     private String text;
     private GregorianCalendar ticketDate;
-    @Column(name="status")
     private String status;
+    @Transient
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
 
     public Ticket(String topic, String text) {

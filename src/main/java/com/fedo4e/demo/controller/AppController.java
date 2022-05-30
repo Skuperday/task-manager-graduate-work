@@ -4,6 +4,7 @@ import com.fedo4e.demo.entity.Ticket;
 import com.fedo4e.demo.entity.User;
 import com.fedo4e.demo.repository.TicketRepository;
 import com.fedo4e.demo.repository.UserRepository;
+import org.hibernate.collection.internal.PersistentSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Persistence;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class AppController {
@@ -39,25 +43,29 @@ public class AppController {
     @GetMapping("/tickets/add")
     public String ticketForm(Model model){
         model.addAttribute("ticketForm", new Ticket());
-        model.addAttribute("ticketDate", new GregorianCalendar());
-        model.addAttribute("status", "");
         return "ticketForm";
     }
 
     @PostMapping("/tickets/add")
     public String addNewTicket(@ModelAttribute("ticketForm") Ticket ticketForm,
-                               @ModelAttribute("ticketDate") GregorianCalendar ticketDate,
-                               @ModelAttribute("status") String status,
                                @RequestParam(value = "contact", required = false) String checkboxValue,
                                Model model){
-        ticketForm.setTicketDate(ticketDate);
-        status = "New";
-        ticketForm.setStatus(status);
+        ticketForm.setTicketDate(new GregorianCalendar());
+        ticketForm.setStatus("New");
+        ticketRepository.save(ticketForm);
         if (checkboxValue != null){
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Long userId = user.getId();
+            ticketForm.setUser(user);
+            Set<Ticket> ticketSet = user.getTickets();
+            ticketSet.add(ticketForm);
+            user.setTickets(ticketSet);
+            userRepository.save(user);
+            user.clearTickets();
         }
-        ticketRepository.save(ticketForm);
+
+
+
+
         return "mainPage";
     }
 
@@ -67,5 +75,10 @@ public class AppController {
     }
 
 
+    @GetMapping("ticket/{ticketId}")
+    public String  getUser(@PathVariable("ticketId") Long ticketId, Model model) {
+        model.addAttribute("ticket", ticketRepository.findById(ticketId));
+        return "ticket";
+    }
 
 }
