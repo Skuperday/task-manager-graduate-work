@@ -1,6 +1,5 @@
 package com.fedo4e.demo.entity;
 
-import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -73,6 +72,9 @@ public class User implements UserDetails {
     }
 
     public void clearTickets(){
-        tickets.clear();
+        if(!tickets.isEmpty()) {
+            tickets.clear();
+        }
+
     }
 }

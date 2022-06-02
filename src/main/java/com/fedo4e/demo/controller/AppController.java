@@ -4,18 +4,14 @@ import com.fedo4e.demo.entity.Ticket;
 import com.fedo4e.demo.entity.User;
 import com.fedo4e.demo.repository.TicketRepository;
 import com.fedo4e.demo.repository.UserRepository;
-import org.hibernate.collection.internal.PersistentSet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Persistence;
+
 import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -53,6 +49,7 @@ public class AppController {
         ticketForm.setTicketDate(new GregorianCalendar());
         ticketForm.setStatus("New");
         ticketRepository.save(ticketForm);
+
         if (checkboxValue != null){
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             ticketForm.setUser(user);
@@ -62,10 +59,6 @@ public class AppController {
             userRepository.save(user);
             user.clearTickets();
         }
-
-
-
-
         return "mainPage";
     }
 

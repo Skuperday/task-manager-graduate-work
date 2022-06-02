@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.GregorianCalendar;
-import java.util.Set;
 
 @Entity
 @Table(name="tickets")
@@ -24,6 +23,7 @@ public class Ticket {
     @Transient
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
 
 
     public Ticket(String topic, String text) {

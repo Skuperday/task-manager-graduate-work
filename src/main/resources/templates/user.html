@@ -46,14 +46,22 @@
         <label for="id">Id</label>
         <h2 th:name="id" class="form-control"  id="id" th:text="${user.id}"/>
 
+        <div type="hidden">
+            <input th:type="hidden" th:name="password" id="password" th:value="${user.password}">
+            <input th:type="hidden" th:name="passwordConfirm"  id="passwordConfirm" th:value="${user.passwordConfirm}">
+        </div>
     </div>
-        <div  sec:authorize="hasRole('ADMIN')" class="col-md-6 mb-3">
-        <label for="role">Права</label>
-        <input type="role" th:name="role" class="form-control"  id="role" th:value="${user.roles}">
+        <div  sec:authorize="hasRole('ADMIN')" class="col d-flex flex-column">
+        <label>Права</label>
+            <div th:each="role : ${roles}" class="form-control">
+                <label><input type="checkbox" th:name="${role.name}" class="checkbox m-1"  id="roles" th:text="${role.getAuthority()}" th:checked="${user.roles.contains(role)}">
+                </label>
+        </div>
 
     </div>
     </div>
-    <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary btn-lg btn-block mt-5" type="submit">Submit</button>
+    <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary btn-lg btn-block mt-5" type="submit">Обновить</button>
+    <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary btn-lg btn-block mt-5" th:href="'/user/' + ${user.id} + '/delete'">Удалить</a>
 </form>
 <div class="mb-3">
     <h2 class="m-auto text-center">Заявки пользователя</h2>

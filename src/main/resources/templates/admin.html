@@ -25,7 +25,9 @@
             <td th:text="${user.id}"></td>
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
-            <td th:text="${user.getRoles()}"></td>
+            <td>
+                <ruby th:each="role : ${user.roles}" class="col" th:text="${role.getAuthority()} + ' '"></ruby>
+            </td>
             <td><a th:href="'/user/' + ${user.id}">Подробнее</a></td>
         </tr>
         </tbody>

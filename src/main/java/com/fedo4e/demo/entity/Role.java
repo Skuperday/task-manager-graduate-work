@@ -4,7 +4,6 @@ package com.fedo4e.demo.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.Set;
 
