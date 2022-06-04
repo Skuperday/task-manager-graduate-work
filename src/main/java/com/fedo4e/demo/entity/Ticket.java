@@ -23,6 +23,9 @@ public class Ticket {
     @Transient
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+    @Transient
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User responsible;
 
 
 

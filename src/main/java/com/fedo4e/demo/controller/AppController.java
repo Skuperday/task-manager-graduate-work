@@ -69,9 +69,15 @@ public class AppController {
 
 
     @GetMapping("ticket/{ticketId}")
-    public String  getUser(@PathVariable("ticketId") Long ticketId, Model model) {
+    public String  getTicket(@PathVariable("ticketId") Long ticketId, Model model) {
         model.addAttribute("ticket", ticketRepository.findById(ticketId));
+        model.addAttribute("employees", userRepository.findAll().stream().map(User :: getAuthorities).filter(role -> !role.equals("ROLE_USER")));
         return "ticket";
+    }
+
+    @PostMapping("ticket/{ticketId}")
+    public String editResponsible(@PathVariable("ticketId") Long ticketId, Model model) {
+        return "redirect:/ticketBrowser";
     }
 
 }

@@ -33,6 +33,9 @@ public class User implements UserDetails {
     private Set<Role> roles;
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Ticket> tickets;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Ticket> ticketsToDo;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
