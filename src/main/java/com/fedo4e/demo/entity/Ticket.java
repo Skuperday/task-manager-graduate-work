@@ -19,6 +19,7 @@ public class Ticket {
     private String topic;
     private String text;
     private GregorianCalendar ticketDate;
+    private GregorianCalendar ticketExpirationDate;
     private String status;
     @Transient
     @ManyToOne(fetch = FetchType.EAGER)
@@ -32,5 +33,10 @@ public class Ticket {
     public Ticket(String topic, String text) {
         this.topic = topic;
         this.text = text;
+    }
+    public boolean isExpired() {
+        if(ticketExpirationDate != null) {
+            return ticketExpirationDate.after(GregorianCalendar.getInstance());
+        } else return false;
     }
 }
