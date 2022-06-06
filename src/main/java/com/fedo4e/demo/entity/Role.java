@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name="tickets")
+@Entity
 @Table(name="roles")
 @Data
 @NoArgsConstructor

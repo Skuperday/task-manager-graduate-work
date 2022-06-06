@@ -64,7 +64,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
                     .permitAll()
                     .logoutSuccessUrl("/");
         }
-
         @Autowired
         protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());

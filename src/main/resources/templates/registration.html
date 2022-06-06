@@ -7,18 +7,18 @@
 </head>
 <body class="text-center">
     <div class="form-signin w-50 p-3 m-auto">
-        <h4>Registration</h4>
+        <h4>Регистрация</h4>
         <form class="needs-validation" novalidate="" th:method="POST">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="firstName">First name</label>
+                    <label for="firstName">Имя</label>
                     <input type="text" th:name="firstName" class="form-control" id="firstName"  placeholder="" value="" required="">
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
+                    <label for="lastName">Фамилия</label>
                     <input type="text" th:name="lastName" class="form-control" id="lastName" placeholder="" value="" required="">
                     <div class="invalid-feedback">
                         Valid last name is required.
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="email">Email </label>
+                <label for="email">Почта</label>
                 <input type="email" th:name="email" class="form-control"  id="email" placeholder="you@example.com">
                 <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="phone">Phone number</label>
+                <label for="phone">Номер телефона</label>
                 <input type="phone" th:name="phone" class="form-control"  id="phone" placeholder="+x(xxx)xxx-xx-xx">
                 <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
@@ -43,24 +43,24 @@
             </div>
 
             <div class="mb-3">
-                <label for="password">Password</label>
+                <label for="password">Пароль</label>
                 <input type="password" th:name="password" class="form-control" id="password" placeholder="************">
                 <div class="invalid-feedback">
                     Your password may have only utf-8 symbols.
                 </div>
             </div>
             <div class="mb-3">
-                <label for="passwordConfirm">Confirm password</label>
+                <label for="passwordConfirm">Подтверждение пароля</label>
                 <input type="password" th:name="passwordConfirm" class="form-control" id="passwordConfirm" placeholder="************">
                 <div class="invalid-feedback">
                     Your passwords could be same.
                 </div>
             </div>
-            <button class="btn btn-primary btn-lg btn-block mt-5" type="submit">Submit</button>
+            <button class="btn btn-primary btn-lg btn-block mt-5" type="submit">Отправить</button>
         </form>
 
         <form method="GET" action="/">
-            <button class="btn btn-secondary btn-lg btn-block mt-3" type="submit">Back</button>
+            <button class="btn btn-secondary btn-lg btn-block mt-3" type="submit">Назад</button>
         </form>
     </div>
 </body>
