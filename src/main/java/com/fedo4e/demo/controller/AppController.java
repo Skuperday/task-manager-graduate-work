@@ -61,6 +61,18 @@ public class AppController {
         }
         return "mainPage";
     }
+    @GetMapping("/tickets/edit/{ticketId}")
+    public String editTicket(@ModelAttribute("ticket") Ticket ticketForm,
+                             @PathVariable("ticketId") Long ticketId, Model model) {
+        model.addAttribute("ticket", ticketRepository.findById(ticketId));
+        model.addAttribute("employees", userRepository.findAll()
+                .stream()
+                .map(User :: getAuthorities)
+                .filter(role -> !role.equals("ROLE_USER")));
+
+        return "ticketEdit";
+    }
+
 
     @GetMapping("/login")
     public String loginForm(Model model) {
@@ -71,13 +83,12 @@ public class AppController {
     @GetMapping("ticket/{ticketId}")
     public String  getTicket(@PathVariable("ticketId") Long ticketId, Model model) {
         model.addAttribute("ticket", ticketRepository.findById(ticketId));
-        model.addAttribute("employees", userRepository.findAll().stream().map(User :: getAuthorities).filter(role -> !role.equals("ROLE_USER")));
+        model.addAttribute("employees", userRepository.findAll()
+                                                                    .stream()
+                                                                    .map(User :: getAuthorities)
+                                                                    .filter(role -> !role.equals("ROLE_USER")));
         return "ticket";
     }
 
-    @PostMapping("ticket/{ticketId}")
-    public String editResponsible(@PathVariable("ticketId") Long ticketId, Model model) {
-        return "redirect:/ticketBrowser";
-    }
 
 }
